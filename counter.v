@@ -69,6 +69,13 @@ begin
 end
 //------------------------------------------------------------------------------
 
+function logic [COUNT_WIDTH-1:0] mux (input logic [COUNT_WIDTH-1:0] x, input logic [COUNT_WIDTH-1:0] y, input logic sel);
+  case (sel)
+    1'b0 : return x;
+    1'b1 : return y;
+  endcase
+endfunction
+
 //------------------------------------------------------------------------------
 // Count logic
 //------------------------------------------------------------------------------
