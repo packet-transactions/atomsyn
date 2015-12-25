@@ -71,9 +71,7 @@ if { [catch {
   # Set constraints including the
   # target clock period, fanout, transition time and any
   # input/output delay constraints.
-  run_dc_cmd "set_units -capacitance pF -time ns"
-  
-  
+  run_dc_cmd "set_units -capacitance fF -time ps"
   echo "======Start Set Clock Period======\n"
   set clock_period    $env(CLOCK_PERIOD)
   echo "======End Set Clock Period======\n"
@@ -81,11 +79,11 @@ if { [catch {
   # set clock period [ns], jitter, pin load and so on.
   # At some point, I'll understand these intimately :)
   run_dc_cmd "create_clock -period $env(CLOCK_PERIOD) -name master_clk clk"
-  run_dc_cmd "set_clock_uncertainty 0.040 -hold [all_clocks]"
-  run_dc_cmd "set_clock_uncertainty 0.040 -setup [all_clocks]"
-  run_dc_cmd "set_max_transition  0.040 [all_inputs]"
-  run_dc_cmd "set_max_transition  0.040 [all_outputs]"
-  run_dc_cmd "set_load -pin_load  0.010 [all_outputs]"
+  run_dc_cmd "set_clock_uncertainty 40 -hold [all_clocks]"
+  run_dc_cmd "set_clock_uncertainty 40 -setup [all_clocks]"
+  run_dc_cmd "set_max_transition  40 [all_inputs]"
+  run_dc_cmd "set_max_transition  40 [all_outputs]"
+  run_dc_cmd "set_load -pin_load  10 [all_outputs]"
   run_dc_cmd "report_timing -loops"
   
   # This actually does the synthesis. The -effort option indicates 
