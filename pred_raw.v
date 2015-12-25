@@ -35,6 +35,16 @@ function logic [COUNT_WIDTH-1:0] mux (input logic [COUNT_WIDTH-1:0] x, input log
   endcase
 endfunction
 
+// Relational operator
+function logic rel_op(input logic[COUNT_WIDTH-1:0] op1, input logic[COUNT_WIDTH-1:0] op2, input logic[2:0] opcode);
+  case(opcode)
+    2'd0 : return op1 != op2;
+    2'd1 : return op1 <  op2;
+    2'd2 : return op1 >  op2;
+    2'd3 : return op1 == op2;
+  endcase
+endfunction
+
 //------------------------------------------------------------------------------
 // Write register
 //------------------------------------------------------------------------------
