@@ -17,7 +17,7 @@ proc run_dc_cmd {cmd} {
 }
 
 if { [catch {
-  source make_generated_vars.tcl
+  source $env(VERILOG_INPUT)
   
   echo "================================="
   echo ${DESIGN_RTL_DIR} "\n"
