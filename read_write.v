@@ -10,7 +10,7 @@ module counter(
 );
 
 // Parameters
-parameter COUNT_WIDTH                   = 3;
+parameter COUNT_WIDTH                   = 32;
 
 // Input signals
 input  logic [COUNT_WIDTH-1:0]          i__constant;
