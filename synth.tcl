@@ -71,11 +71,7 @@ if { [catch {
   # Set constraints including the
   # target clock period, fanout, transition time and any
   # input/output delay constraints.
-  run_dc_cmd "
-    set_units \
-        -capacitance                        pF \
-        -time                               ns
-  "
+  run_dc_cmd "set_units -capacitance pF -time ns"
   
   
   echo "======Start Set Clock Period======\n"
