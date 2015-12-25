@@ -24,9 +24,9 @@ if { [catch {
   
   run_dc_cmd "set_host_options -max_cores 10"
   
-  # The library setup is kept in a separate tcl file which we now source
-  
-  source libs.tcl
+  # library setup
+  set target_library       "$env(SYNTH_LIB)"
+  set link_library         "* $env(SYNTH_LIB)"
   
   set hdlin_sverilog_std                  2009
   set hdlin_ff_always_async_set_reset     true
@@ -68,10 +68,28 @@ if { [catch {
   run_dc_cmd "uniquify"
   run_dc_cmd "check_design"
   
-  # We now load in the constraints file
+  # Set constraints including the
+  # target clock period, fanout, transition time and any
+  # input/output delay constraints.
+  run_dc_cmd "
+    set_units \
+        -capacitance                        pF \
+        -time                               ns
+  "
   
-  source synth.sdc
   
+  echo "======Start Set Clock Period======\n"
+  set clock_period    $env(CLOCK_PERIOD)
+  echo "======End Set Clock Period======\n"
+  
+  # set clock period [ns], jitter, pin load and so on.
+  # At some point, I'll understand these intimately :)
+  run_dc_cmd "create_clock -period $env(CLOCK_PERIOD) -name master_clk clk"
+  run_dc_cmd "set_clock_uncertainty 0.040 -hold [all_clocks]"
+  run_dc_cmd "set_clock_uncertainty 0.040 -setup [all_clocks]"
+  run_dc_cmd "set_max_transition  0.040 [all_inputs]"
+  run_dc_cmd "set_max_transition  0.040 [all_outputs]"
+  run_dc_cmd "set_load -pin_load  0.010 [all_outputs]"
   run_dc_cmd "report_timing -loops"
   
   # This actually does the synthesis. The -effort option indicates 
