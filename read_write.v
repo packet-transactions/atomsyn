@@ -36,7 +36,7 @@ endfunction
 //------------------------------------------------------------------------------
 always_comb
 begin
-    o__write__pff = mux(i__constant, i__pkt_1, i__sel);
+  o__write__pff = mux(i__constant, i__pkt_1, i__sel) + r__write__pff;
 end
 //------------------------------------------------------------------------------
 //
