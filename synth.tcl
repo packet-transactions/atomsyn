@@ -2,7 +2,7 @@
 # TCL Script File for Synthesis using Synopsys Design Compiler
 #-------------------------------------------------------------------------
 
-# 
+#
 
 # The makefile will generate various variables which we now read in
 # and then display
@@ -17,12 +17,9 @@ proc run_dc_cmd {cmd} {
 }
 
 if { [catch {
-  source $env(VERILOG_INPUT)
-  
   echo "================================="
-  echo ${DESIGN_RTL_DIR} "\n"
-  echo ${DESIGN_RTL} "\n"
-  echo ${DESIGN_TOPLEVEL} "\n"
+  echo $env(DESIGN_RTL) "\n"
+  echo $env(DESIGN_TOPLEVEL) "\n"
   echo "================================="
   
   run_dc_cmd "set_host_options -max_cores 10"
@@ -53,15 +50,15 @@ if { [catch {
   
   # These two commands read in your verilog source and elaborate it
  
-  run_dc_cmd "analyze -f sverilog {${DESIGN_RTL}} -vcs \"+define+USE_STDCELL_LATCH\""
-  run_dc_cmd "elaborate -lib WORK ${DESIGN_TOPLEVEL} -update"
+  run_dc_cmd "analyze -f sverilog {$env(DESIGN_RTL)} -vcs \"+define+USE_STDCELL_LATCH\""
+  run_dc_cmd "elaborate -lib WORK $env(DESIGN_TOPLEVEL) -update"
   #elaborate -lib WORK router -update
   
   run_dc_cmd "set_fix_multiple_port_nets -all -buffer_constants [get_designs *]"
   
   # This command will check your design for any errors
   
-  run_dc_cmd "current_design ${DESIGN_TOPLEVEL}"
+  run_dc_cmd "current_design $env(DESIGN_TOPLEVEL)"
   run_dc_cmd "check_design"
   
   #ungroup rtr -flatten
@@ -88,8 +85,8 @@ if { [catch {
   
   run_dc_cmd "report_area"
   run_dc_cmd "report_timing -significant_digits 3"
-  
-  # Used to exit the Design Compiler 
+
+  # Used to exit the Design Compiler
   quit
 } ret ] } {
   puts "Script terminated with error message $ret"

@@ -14,13 +14,13 @@ run_dc_cmd "
 
 
 echo "======Start Set Clock Period======\n"
-set clock_period    ${CLOCK_PERIOD}
+set clock_period    $env(CLOCK_PERIOD)
 echo "======End Set Clock Period======\n"
 
 # set clock period [ns]
 run_dc_cmd "
   create_clock \
-      -period                             ${CLOCK_PERIOD} \
+      -period                             $env(CLOCK_PERIOD) \
       -name                               master_clk \
       clk
 "
