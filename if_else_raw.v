@@ -3,7 +3,7 @@ typedef logic [31:0]         int32_t;
 typedef logic bool;
 typedef logic[1:0] int2_t;
 
-module counter(
+module if_else_raw(
     clk,
 
     pkt_1,

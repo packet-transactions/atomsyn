@@ -1,4 +1,4 @@
-module counter(
+module raw(
     clk,
 
     i__constant,
