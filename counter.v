@@ -20,8 +20,7 @@ module counter(
 //------------------------------------------------------------------------------
 // Parameters
 //------------------------------------------------------------------------------
-parameter NUM_COUNT                     = 8294967296;
-parameter COUNT_WIDTH                   = $clog2(NUM_COUNT);
+parameter COUNT_WIDTH                   = 3;
 parameter INIT_VALUE                    = 1'b0;
 //------------------------------------------------------------------------------
 
@@ -66,7 +65,7 @@ assign o__count__next   = w__count__next;
 always_comb
 begin
     // To eliminate the 32-bit to ?-bit conversion warnings
-    w__max_count = 4294967295;
+    w__max_count = 7;
 end
 //------------------------------------------------------------------------------
 
