@@ -15,13 +15,13 @@ def program_wrapper(program, t_stdout = subprocess.PIPE, t_stderr = subprocess.P
   sp = subprocess.Popen(program, stdout = t_stdout, stderr = t_stderr, shell=True)
   out, err = sp.communicate()
   if (sp.returncode != 0):
-    print " ".join(program), " failed (non-zero return code) with stdout:"
+    print program, " failed (non-zero return code) with stdout:"
     print out
     print "stderr:"
     print err
     sys.exit(sp.returncode)
   else :
-    print " ".join(program), " completed with return code of zero"
+    print program, " completed with return code of zero"
     return (out, err)
 
 # Run Synopsys DC, using bisection search to find the min. clock
