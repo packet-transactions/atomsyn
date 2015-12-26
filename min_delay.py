@@ -26,9 +26,12 @@ def program_wrapper(program, t_stdout = subprocess.PIPE, t_stderr = subprocess.P
     return (out, err)
 
 # Run Synopsys DC
-arg_list = ["DESIGN_RTL=" + atom_file, "DESIGN_TOPLEVEL=" + atom_file.split(".")[0], "SYNTH_LIB=" + synth_lib, "CLOCK_PERIOD=" + str(clock_ns), "dc_shell -f synth.tcl"]
-out, err = program_wrapper(arg_list);
-print arg_list
+arg_str =  "DESIGN_RTL=" + atom_file + " " + \
+           "DESIGN_TOPLEVEL=" + atom_file.split(".")[0] + " " + \
+           "SYNTH_LIB=" + synth_lib + " " + \
+           "CLOCK_PERIOD=" + str(clock_ns) + " " + \
+           "dc_shell -f synth.tcl"
+out, err = program_wrapper(arg_str);
 
 print out
 print err
