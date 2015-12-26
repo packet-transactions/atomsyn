@@ -29,7 +29,9 @@ left_end    = 1
 right_end   = 1000
 cur_clock   = (left_end + right_end) / 2.0
 
-while (left_end < right_end):
+while (left_end <= right_end):
+  assert(left_end > 0)
+  assert(right_end > 0)
   cur_clock = int((left_end + right_end) / 2.0)
   arg_str =  "DESIGN_RTL=" + atom_file + " " + \
            "DESIGN_TOPLEVEL=" + atom_file.split(".")[0] + " " + \
