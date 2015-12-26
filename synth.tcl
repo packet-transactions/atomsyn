@@ -44,7 +44,8 @@ if { [catch {
   # set hdlin_check_no_latch true
   run_dc_cmd "define_name_rules nameRules -restricted \"!@#$%^&*()\\-\" -case_insensitive"
   set verilogout_show_unconnected_pins "true"
-  
+ 
+  sh rm -rf analyzed
   sh mkdir analyzed
   run_dc_cmd "define_design_lib WORK -path analyzed"
   
@@ -90,11 +91,11 @@ if { [catch {
   # how much time the synthesizer should spend optimizing your design to
   # gates. Setting it to high means synthesis will take longer but will
   # probably produce better results.
-  
+
   echo "======START COMPILATION===========================\n\n\n"
   run_dc_cmd "compile_ultra"
   echo "======END COMPILATION=============================\n\n\n"
-  
+
   run_dc_cmd "report_area"
   run_dc_cmd "report_timing -significant_digits 3"
 
