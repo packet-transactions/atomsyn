@@ -1,11 +1,13 @@
-module rw(
+module stateless(
     clk,
 
     pkt_1,
     pkt_2,
     pkt_3,
+    cons_1,
+    opcode,
 
-    o__write
+    o_write
 );
 
 // Parameters
@@ -22,7 +24,7 @@ input  logic [3:0]                      opcode;
 input  logic clk;
 
 // Output signals
-output logic [COUNT_WIDTH-1:0]          o__write;
+output logic [COUNT_WIDTH-1:0]          o_write;
 
 //------------------------------------------------------------------------------
 // Write register
