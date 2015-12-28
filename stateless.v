@@ -7,7 +7,8 @@ module stateless(
     cons_1,
     opcode,
 
-    o_write
+    o_write,
+    o_read
 );
 
 // Parameters
@@ -22,15 +23,18 @@ input  logic [3:0]                      opcode;
 
 // Sequential elements
 input  logic clk;
+logic [COUNT_WIDTH-1:0]          r__register__pff;
 
 // Output signals
 output logic [COUNT_WIDTH-1:0]          o_write;
+output logic [COUNT_WIDTH-1:0]          o_read;
 
 //------------------------------------------------------------------------------
 // Write register
 //------------------------------------------------------------------------------
 always_comb
 begin
+  o_read = r__register__pff;
   case (opcode)
     // arithmetic
     4'd0 : o_write = (pkt_1 +  pkt_2);
@@ -54,5 +58,12 @@ begin
     4'd13: o_write = (pkt_1 ?  pkt_2 : pkt_3); 
   endcase
 end
+
+//------------ Latch into register--------------------------------
+always_ff @ (posedge clk)
+begin
+  r__register__pff <= o_write;
+end
+
 
 endmodule
