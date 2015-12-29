@@ -1,3 +1,8 @@
+// typedefs
+typedef logic [31:0]         int32_t;
+typedef logic bool;
+typedef logic[1:0] int2_t;
+
 module stateless(
     clk,
 
@@ -6,6 +11,11 @@ module stateless(
     pkt_3,
     cons_1,
     opcode,
+    sel_1,
+    sel_2,
+    sel_3,
+    sel_4,
+    sel_5,
 
     o_write,
     o_read
@@ -15,19 +25,53 @@ module stateless(
 parameter COUNT_WIDTH                   = 32;
 
 // Input signals
-input  logic [COUNT_WIDTH-1:0]          pkt_1;
-input  logic [COUNT_WIDTH-1:0]          pkt_2;
-input  logic [COUNT_WIDTH-1:0]          pkt_3;
-input  logic [COUNT_WIDTH-1:0]          cons_1;
+input  int32_t          pkt_1;
+input  int32_t          pkt_2;
+input  int32_t          pkt_3;
+input  int32_t          cons_1;
 input  logic [3:0]                      opcode;
+
+// Input sel signals
+input  int2_t sel_1;
+input  int2_t sel_2;
+input  int2_t sel_3;
+input  int2_t sel_4;
+input  int2_t sel_5;
 
 // Sequential elements
 input  logic clk;
-logic [COUNT_WIDTH-1:0]          r__register__pff;
+int32_t          r__register__pff;
 
 // Output signals
 output logic [COUNT_WIDTH-1:0]          o_write;
 output logic [COUNT_WIDTH-1:0]          o_read;
+
+// Intermediate signals
+int32_t op_bin_1;
+int32_t op_bin_2;
+int32_t op_cond_1;
+int32_t op_cond_2;
+int32_t op_cond_3;
+
+// 3-way mux
+function int32_t mux3 (input int32_t x, input int32_t y, input int32_t z, input int2_t sel);
+  case (sel)
+    2'd0 : return x;
+    2'd1 : return y;
+    2'd2 : return z;
+    2'd3 : return z;
+  endcase
+endfunction
+
+// 4-way mux
+function int32_t mux4 (input int32_t x, input int32_t y, input int32_t z, input int32_t w, input int2_t sel);
+  case (sel)
+    2'd0 : return x;
+    2'd1 : return y;
+    2'd2 : return z;
+    2'd3 : return w;
+  endcase
+endfunction
 
 //------------------------------------------------------------------------------
 // Write register
@@ -35,27 +79,34 @@ output logic [COUNT_WIDTH-1:0]          o_read;
 always_comb
 begin
   o_read = r__register__pff;
+
+  // Operands for binary operators
+  op_bin_1     = mux3(pkt_1, pkt_2, cons_1, sel_1);
+  op_bin_2     = mux3(pkt_1, pkt_2, cons_1, sel_2);
+
+  // Operands for conditional operator
+  op_cond_1    = mux4(pkt_1, pkt_2, pkt_3, cons_1, sel_3);
+  op_cond_2    = mux4(pkt_1, pkt_2, pkt_3, cons_1, sel_4);
+  op_cond_3    = mux4(pkt_1, pkt_2, pkt_3, cons_1, sel_5);
+
   case (opcode)
     // arithmetic
-    4'd0 : o_write = (pkt_1 +  pkt_2);
-    4'd1 : o_write = (pkt_1 -  pkt_2);
+    4'd0 : o_write = (op_bin_1 +  op_bin_2);
+    4'd1 : o_write = (op_bin_1 -  op_bin_2);
     // logical
-    4'd2 : o_write = (pkt_1 &  pkt_2);
-    4'd3 : o_write = (pkt_1 ^  pkt_2);
-    4'd4 : o_write = (pkt_1 |  pkt_2);
-    // constant arithmetic
-    4'd5 : o_write = (pkt_1 +  cons_1);
-    4'd6 : o_write = (pkt_1 -  cons_1);
+    4'd2 : o_write = (op_bin_1 &  op_bin_2);
+    4'd3 : o_write = (op_bin_1 ^  op_bin_2);
+    4'd4 : o_write = (op_bin_1 |  op_bin_2);
     // relational
-    4'd7 : o_write = (pkt_1 == pkt_2);
-    4'd8 : o_write = (pkt_1 != pkt_2);
-    4'd9 : o_write = (pkt_1 >= pkt_2);
-    4'd10: o_write = (pkt_1 <  pkt_2);
+    4'd5 : o_write = (op_bin_1 == op_bin_2);
+    4'd6 : o_write = (op_bin_1 != op_bin_2);
+    4'd7 : o_write = (op_bin_1 >= op_bin_2);
+    4'd8 : o_write = (op_bin_1 <  op_bin_2);
     // shifts
-    4'd11: o_write = (pkt_1 << cons_1);
-    4'd12: o_write = (pkt_1 >> cons_1);
+    4'd9:  o_write = (op_bin_1 << op_bin_2);
+    4'd10: o_write = (op_bin_1 >> op_bin_2);
     // conditional
-    4'd13: o_write = (pkt_1 ?  pkt_2 : pkt_3); 
+    4'd11: o_write = (op_cond_1 ?  op_cond_2 : op_cond_3);
   endcase
 end
 
