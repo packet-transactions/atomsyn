@@ -82,7 +82,6 @@ if { [catch {
   run_dc_cmd "create_clock -period $env(CLOCK_PERIOD) -name master_clk clk"
   run_dc_cmd "set_clock_uncertainty 40 -hold {[get_object_name [all_clocks]]}"
   run_dc_cmd "set_clock_uncertainty 40 -setup {[get_object_name [all_clocks]]}"
-  run_dc_cmd "set_output_delay -clock master_clk 0 [all_outputs]"
   run_dc_cmd "set_max_transition  40 {[get_object_name [all_inputs]]}"
   run_dc_cmd "set_max_transition  40 {[get_object_name [all_outputs]]}"
   run_dc_cmd "set_load -pin_load  10 {[get_object_name [all_outputs]]}"
