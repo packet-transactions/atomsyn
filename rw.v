@@ -19,6 +19,10 @@ input  logic                            i__sel;
 
 // Sequential elements
 logic [COUNT_WIDTH-1:0]                 r__register__pff;
+logic [COUNT_WIDTH-1:0]                 r__constant;
+logic [COUNT_WIDTH-1:0]                 r__pkt_1;
+logic                                   r__sel;
+
 input  logic clk;
 
 // Output signals
@@ -39,7 +43,7 @@ endfunction
 always_comb
 begin
   o__read  = r__register__pff;
-  o__write = mux(i__constant, i__pkt_1, i__sel);
+  o__write = mux(r__constant, r__pkt_1, r__sel);
 end
 
 //------------------------------------------------------------------------------
@@ -47,6 +51,9 @@ end
 always_ff @ (posedge clk)
 begin
   r__register__pff <= o__write;
+  r__constant      <= i__constant;
+  r__pkt_1         <= i__pkt_1;
+  r__sel           <= i__sel;
 end
 
 endmodule
