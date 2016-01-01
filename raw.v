@@ -4128,6 +4128,7 @@ input  logic                            i__sel2;
 
 // Sequential elements
 logic [COUNT_WIDTH-1:0]                 r__register__pff;
+logic [COUNT_WIDTH-1:0]                 i__pkt_reg;
 input  logic clk;
 
 // Output signals
@@ -4148,7 +4149,7 @@ endfunction
 always_comb
 begin
   o__read  = r__register__pff;
-  o__write = r__register__pff + lut(lut(i__pkt_1));
+  o__write = r__register__pff + lut(lut(i__pkt_reg));
 end
 
 //------------------------------------------------------------------------------
@@ -4156,6 +4157,7 @@ end
 always_ff @ (posedge clk)
 begin
   r__register__pff <= o__write;
+  i__pkt_reg <= i__pkt_1;
 end
 
 endmodule
