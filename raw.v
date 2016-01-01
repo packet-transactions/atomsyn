@@ -4148,7 +4148,7 @@ endfunction
 always_comb
 begin
   o__read  = r__register__pff;
-  o__write = lut(lut(lut(r__register__pff)));
+  o__write = r__register__pff + lut(lut(i__pkt_1));
 end
 
 //------------------------------------------------------------------------------
