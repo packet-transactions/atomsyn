@@ -6,36 +6,43 @@ typedef logic[1:0] int2_t;
 module pred_raw(
     clk,
 
-    pkt_1,
-    pkt_2,
-    cons_1,
-    cons_2,
- 
-    sel_1,
-    sel_2,
-    sel_3,
-    sel_4,
-    rel_opcode,
+    i_pkt_1,
+    i_pkt_2,
+    i_cons_1,
+    i_cons_2,
+    i_sel_1,
+    i_sel_2,
+    i_sel_3,
+    i_sel_4,
+    i_rel_opcode,
 
     o__write,
     o__read
 );
 
 // Input signals
-input  int32_t          pkt_1;
-input  int32_t          pkt_2;
-input  int32_t          cons_1;
-input  int32_t          cons_2;
-
-input  bool             sel_1;
-input  int2_t           sel_2;
-input  bool             sel_3;
-input  int2_t           sel_4;
-input  int2_t           rel_opcode;
+input  int32_t          i_pkt_1;
+input  int32_t          i_pkt_2;
+input  int32_t          i_cons_1;
+input  int32_t          i_cons_2;
+input  bool             i_sel_1;
+input  int2_t           i_sel_2;
+input  bool             i_sel_3;
+input  int2_t           i_sel_4;
+input  int2_t           i_rel_opcode;
 
 // Sequential elements
 int32_t state_1;
 input  logic clk;
+int32_t          pkt_1;
+int32_t          pkt_2;
+int32_t          cons_1;
+int32_t          cons_2;
+bool             sel_1;
+int2_t           sel_2;
+bool             sel_3;
+int2_t           sel_4;
+int2_t           rel_opcode;
 
 // Output signals
 output int32_t o__write;
@@ -90,6 +97,15 @@ end
 always_ff @ (posedge clk)
 begin
   state_1 <= o__write;
+  pkt_1 <= i_pkt_1;
+  pkt_2 <= i_pkt_2;
+  cons_1 <= i_cons_1;
+  cons_2 <= i_cons_2;
+  sel_1 <= i_sel_1;
+  sel_2 <= i_sel_2;
+  sel_3 <= i_sel_3;
+  sel_4 <= i_sel_4;
+  rel_opcode <= i_rel_opcode;
 end
 
 endmodule
