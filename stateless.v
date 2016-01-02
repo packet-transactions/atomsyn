@@ -6,16 +6,16 @@ typedef logic[1:0] int2_t;
 module stateless(
     clk,
 
-    pkt_1,
-    pkt_2,
-    pkt_3,
-    cons_1,
-    opcode,
-    sel_1,
-    sel_2,
-    sel_3,
-    sel_4,
-    sel_5,
+    i__pkt_1,
+    i__pkt_2,
+    i__pkt_3,
+    i__cons_1,
+    i__opcode,
+    i__sel_1,
+    i__sel_2,
+    i__sel_3,
+    i__sel_4,
+    i__sel_5,
 
     o_write,
     o_read
@@ -25,22 +25,30 @@ module stateless(
 parameter COUNT_WIDTH                   = 32;
 
 // Input signals
-input  int32_t          pkt_1;
-input  int32_t          pkt_2;
-input  int32_t          pkt_3;
-input  int32_t          cons_1;
-input  logic [3:0]                      opcode;
-
-// Input sel signals
-input  int2_t sel_1;
-input  int2_t sel_2;
-input  int2_t sel_3;
-input  int2_t sel_4;
-input  int2_t sel_5;
+input  int32_t          i__pkt_1;
+input  int32_t          i__pkt_2;
+input  int32_t          i__pkt_3;
+input  int32_t          i__cons_1;
+input  logic [3:0]      i__opcode;
+input  int2_t           i__sel_1;
+input  int2_t           i__sel_2;
+input  int2_t           i__sel_3;
+input  int2_t           i__sel_4;
+input  int2_t           i__sel_5;
 
 // Sequential elements
 input  logic clk;
 int32_t          r__register__pff;
+int32_t          pkt_1;
+int32_t          pkt_2;
+int32_t          pkt_3;
+int32_t          cons_1;
+logic [3:0]      opcode;
+int2_t           sel_1;
+int2_t           sel_2;
+int2_t           sel_3;
+int2_t           sel_4;
+int2_t           sel_5;
 
 // Output signals
 output logic [COUNT_WIDTH-1:0]          o_write;
@@ -114,7 +122,15 @@ end
 always_ff @ (posedge clk)
 begin
   r__register__pff <= o_write;
+  pkt_1  <= i__pkt_1;
+  pkt_2  <= i__pkt_2;
+  pkt_3  <= i__pkt_3;
+  cons_1 <= i__cons_1;
+  opcode <= i__opcode;
+  sel_1  <= i__sel_1;
+  sel_2  <= i__sel_2;
+  sel_3  <= i__sel_3;
+  sel_4  <= i__sel_4;
+  sel_5  <= i__sel_5;
 end
-
-
 endmodule
