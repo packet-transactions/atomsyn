@@ -6,94 +6,131 @@ typedef logic[1:0] int2_t;
 module nested_ifs(
     clk,
 
-    pkt_1,
-    pkt_2,
-    cons_1,
-    cons_2,
-    cons_3,
-    cons_4,
-    cons_5,
-    cons_6,
-    cons_7,
-    cons_8,
-    cons_9,
-    cons_10,
-    cons_11,
+    i__pkt_1,
+    i__pkt_2,
+    i__cons_1,
+    i__cons_2,
+    i__cons_3,
+    i__cons_4,
+    i__cons_5,
+    i__cons_6,
+    i__cons_7,
+    i__cons_8,
+    i__cons_9,
+    i__cons_10,
+    i__cons_11,
  
-    sel_1,
-    sel_2,
-    sel_3,
-    sel_4,
-    sel_5,
-    sel_6,
-    sel_7,
-    sel_8,
-    sel_9,
-    sel_10,
-    sel_11,
-    sel_12,
-    sel_13,
-    sel_14,
-    sel_15,
-    sel_16,
-    sel_17,
-    sel_18,
-    sel_19,
-    sel_20,
-    sel_21,
+    i__sel_1,
+    i__sel_2,
+    i__sel_3,
+    i__sel_4,
+    i__sel_5,
+    i__sel_6,
+    i__sel_7,
+    i__sel_8,
+    i__sel_9,
+    i__sel_10,
+    i__sel_11,
+    i__sel_12,
+    i__sel_13,
+    i__sel_14,
+    i__sel_15,
+    i__sel_16,
+    i__sel_17,
+    i__sel_18,
+    i__sel_19,
+    i__sel_20,
+    i__sel_21,
 
-    rel_op1,
-    rel_op2,
-    rel_op3,
+    i__rel_op1,
+    i__rel_op2,
+    i__rel_op3,
 
     o__write,
     o__read
 );
 
 // Input signals
-input  int32_t          pkt_1;
-input  int32_t          pkt_2;
-input  int32_t          cons_1;
-input  int32_t          cons_2;
-input  int32_t          cons_3;
-input  int32_t          cons_4;
-input  int32_t          cons_5;
-input  int32_t          cons_6;
-input  int32_t          cons_7;
-input  int32_t          cons_8;
-input  int32_t          cons_9;
-input  int32_t          cons_10;
-input  int32_t          cons_11;
+input  int32_t          i__pkt_1;
+input  int32_t          i__pkt_2;
+input  int32_t          i__cons_1;
+input  int32_t          i__cons_2;
+input  int32_t          i__cons_3;
+input  int32_t          i__cons_4;
+input  int32_t          i__cons_5;
+input  int32_t          i__cons_6;
+input  int32_t          i__cons_7;
+input  int32_t          i__cons_8;
+input  int32_t          i__cons_9;
+input  int32_t          i__cons_10;
+input  int32_t          i__cons_11;
 
-input  bool             sel_1;
-input  bool             sel_2;
-input  bool             sel_3;
-input  bool             sel_4;
-input  bool             sel_5;
-input  bool             sel_6;
-input  bool             sel_7;
-input  int2_t           sel_8;
-input  int2_t           sel_9;
-input  bool             sel_10;
-input  int2_t           sel_11;
-input  int2_t           sel_12;
-input  bool             sel_13;
-input  bool             sel_14;
-input  bool             sel_15;
-input  bool             sel_16;
-input  int2_t           sel_17;
-input  int2_t           sel_18;
-input  bool             sel_19;
-input  int2_t           sel_20;
-input  int2_t           sel_21;
+input  bool             i__sel_1;
+input  bool             i__sel_2;
+input  bool             i__sel_3;
+input  bool             i__sel_4;
+input  bool             i__sel_5;
+input  bool             i__sel_6;
+input  bool             i__sel_7;
+input  int2_t           i__sel_8;
+input  int2_t           i__sel_9;
+input  bool             i__sel_10;
+input  int2_t           i__sel_11;
+input  int2_t           i__sel_12;
+input  bool             i__sel_13;
+input  bool             i__sel_14;
+input  bool             i__sel_15;
+input  bool             i__sel_16;
+input  int2_t           i__sel_17;
+input  int2_t           i__sel_18;
+input  bool             i__sel_19;
+input  int2_t           i__sel_20;
+input  int2_t           i__sel_21;
 
-input  int2_t           rel_op1;
-input  int2_t           rel_op2;
-input  int2_t           rel_op3;
+input  int2_t           i__rel_op1;
+input  int2_t           i__rel_op2;
+input  int2_t           i__rel_op3;
 
 // Sequential elements
 int32_t state_1;
 input  logic clk;
+int32_t          pkt_1;
+int32_t          pkt_2;
+int32_t          cons_1;
+int32_t          cons_2;
+int32_t          cons_3;
+int32_t          cons_4;
+int32_t          cons_5;
+int32_t          cons_6;
+int32_t          cons_7;
+int32_t          cons_8;
+int32_t          cons_9;
+int32_t          cons_10;
+int32_t          cons_11;
+bool             sel_1;
+bool             sel_2;
+bool             sel_3;
+bool             sel_4;
+bool             sel_5;
+bool             sel_6;
+bool             sel_7;
+int2_t           sel_8;
+int2_t           sel_9;
+bool             sel_10;
+int2_t           sel_11;
+int2_t           sel_12;
+bool             sel_13;
+bool             sel_14;
+bool             sel_15;
+bool             sel_16;
+int2_t           sel_17;
+int2_t           sel_18;
+bool             sel_19;
+int2_t           sel_20;
+int2_t           sel_21;
+int2_t           rel_op1;
+int2_t           rel_op2;
+int2_t           rel_op3;
 
 // Output signals
 output int32_t o__write;
@@ -162,6 +199,42 @@ end
 always_ff @ (posedge clk)
 begin
   state_1 <= o__write;
+  pkt_1 <= i__pkt_1;
+  pkt_2 <= i__pkt_2;
+  cons_1 <= i__cons_1;
+  cons_2 <= i__cons_2;
+  cons_3 <= i__cons_3;
+  cons_4 <= i__cons_4;
+  cons_5 <= i__cons_5;
+  cons_6 <= i__cons_6;
+  cons_7 <= i__cons_7;
+  cons_8 <= i__cons_8;
+  cons_9 <= i__cons_9;
+  cons_10 <= i__cons_10;
+  cons_11 <= i__cons_11;
+  sel_1 <= i__sel_1;
+  sel_2 <= i__sel_2;
+  sel_3 <= i__sel_3;
+  sel_4 <= i__sel_4;
+  sel_5 <= i__sel_5;
+  sel_6 <= i__sel_6;
+  sel_7 <= i__sel_7;
+  sel_8 <= i__sel_8;
+  sel_9 <= i__sel_9;
+  sel_10 <= i__sel_10;
+  sel_11 <= i__sel_11;
+  sel_12 <= i__sel_12;
+  sel_13 <= i__sel_13;
+  sel_14 <= i__sel_14;
+  sel_15 <= i__sel_15;
+  sel_16 <= i__sel_16;
+  sel_17 <= i__sel_17;
+  sel_18 <= i__sel_18;
+  sel_19 <= i__sel_19;
+  sel_20 <= i__sel_20;
+  sel_21 <= i__sel_21;
+  rel_op1 <= i__rel_op1;
+  rel_op2 <= i__rel_op2;
+  rel_op3 <= i__rel_op3;
 end
-
 endmodule
