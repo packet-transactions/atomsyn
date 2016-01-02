@@ -114,7 +114,7 @@ begin
     4'd9:  o_write = (op_bin_1 << op_bin_2);
     4'd10: o_write = (op_bin_1 >> op_bin_2);
     // conditional
-    4'd11: o_write = (op_cond_1 ?  op_cond_2 : op_cond_3);
+    default: o_write = (op_cond_1 ?  op_cond_2 : op_cond_3);
   endcase
 end
 
