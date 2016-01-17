@@ -22,6 +22,8 @@ module sub(
     i__sel_7,
     i__sel_8,
     i__rel_opcode,
+    i__arith_opcode1,
+    i__arith_opcode2,
 
     o__write,
     o__read
@@ -44,6 +46,8 @@ input  int2_t           i__sel_6;
 input  int2_t           i__sel_7;
 input  int2_t           i__sel_8;
 input  int2_t           i__rel_opcode;
+input  bool             i__arith_opcode1;
+input  bool             i__arith_opcode2;
 
 // Sequential elements
 int32_t state_1;
@@ -64,7 +68,8 @@ int2_t           sel_6;
 int2_t           sel_7;
 int2_t           sel_8;
 int2_t           rel_opcode;
-
+bool             arith_opcode1;
+bool             arith_opcode2;
 // Output signals
 output int32_t o__write;
 output int32_t o__read;
@@ -97,6 +102,15 @@ function logic rel_op(input int32_t op1, input int32_t op2, input int2_t opcode)
   endcase
 endfunction
 
+// Arithmetic operator
+function int32_t arith_op(input int32_t op1, input int32_t op2, input bool opcode);
+  case(opcode)
+    1'b0 : return op1 - op2;
+    1'b1 : return op1 + op2;
+  endcase
+endfunction
+
+
 //------------------------------------------------------------------------------
 // Write register
 //------------------------------------------------------------------------------
@@ -105,11 +119,11 @@ begin
   o__read  = state_1;
   if (rel_op((mux2(state_1, 0, sel_1)), mux3(pkt_1, pkt_2, cons_1, sel_2), rel_opcode))
   begin
-    o__write = mux2(state_1, 0, sel_3) + mux3(pkt_1, pkt_2, cons_2, sel_4) - mux3(pkt_1, pkt_2, cons_4, sel_7);
+    o__write = mux2(state_1, 0, sel_3) + arith_op(mux3(pkt_1, pkt_2, cons_2, sel_4), mux3(pkt_1, pkt_2, cons_4, sel_7), arith_opcode1);
   end
   else
   begin
-    o__write = mux2(state_1, 0, sel_5) + mux3(pkt_1, pkt_2, cons_3, sel_6) - mux3(pkt_1, pkt_2, cons_5, sel_8);
+    o__write = mux2(state_1, 0, sel_5) + arith_op(mux3(pkt_1, pkt_2, cons_3, sel_6), mux3(pkt_1, pkt_2, cons_5, sel_8), arith_opcode2);
   end
 end
 
@@ -134,5 +148,7 @@ begin
   sel_7 <= i__sel_7;
   sel_8 <= i__sel_8;
   rel_opcode <= i__rel_opcode;
+  arith_opcode1 <= i__arith_opcode1;
+  arith_opcode2 <= i__arith_opcode2;
 end
 endmodule
