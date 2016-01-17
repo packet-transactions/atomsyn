@@ -99,7 +99,7 @@ input  int2_t           i__rel_op3;
 input  bool             i__arith_op1;
 input  bool             i__arith_op2;
 input  bool             i__arith_op3;
-input  bool             i__arith_op3;
+input  bool             i__arith_op4;
 
 // Sequential elements
 int32_t state_1;
@@ -144,7 +144,7 @@ int2_t           rel_op3;
 bool             arith_op1;
 bool             arith_op2;
 bool             arith_op3;
-bool             arith_op3;
+bool             arith_op4;
 
 // Output signals
 output int32_t o__write;
