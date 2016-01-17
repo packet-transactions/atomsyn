@@ -110,7 +110,6 @@ function int32_t arith_op(input int32_t op1, input int32_t op2, input bool opcod
   endcase
 endfunction
 
-
 //------------------------------------------------------------------------------
 // Write register
 //------------------------------------------------------------------------------
