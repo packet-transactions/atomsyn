@@ -110,10 +110,10 @@ input  int32_t          i__cons_18;
 input  int32_t          i__cons_19;
 input  int32_t          i__cons_20;
 
-input  bool             i__sel_1;
+input  int2_t           i__sel_1;
 input  int2_t           i__sel_2;
 input  int2_t           i__sel_3;
-input  bool             i__sel_4;
+input  int2_t           i__sel_4;
 input  int2_t           i__sel_5;
 input  int2_t           i__sel_6;
 input  bool             i__sel_7;
@@ -122,7 +122,7 @@ input  int2_t           i__sel_9;
 input  bool             i__sel_10;
 input  int2_t           i__sel_11;
 input  int2_t           i__sel_12;
-input  bool             i__sel_13;
+input  int2_t           i__sel_13;
 input  int2_t           i__sel_14;
 input  int2_t           i__sel_15;
 input  bool             i__sel_16;
@@ -143,7 +143,7 @@ input  int2_t           i__sel_30;
 input  bool             i__sel_31;
 input  int2_t           i__sel_32;
 input  int2_t           i__sel_33;
-input  bool             i__sel_34;
+input  int2_t           i__sel_34;
 input  int2_t           i__sel_35;
 input  int2_t           i__sel_36;
 
@@ -188,10 +188,10 @@ int32_t          cons_18;
 int32_t          cons_19;
 int32_t          cons_20;
 
-bool             sel_1;
+int2_t           sel_1;
 int2_t           sel_2;
 int2_t           sel_3;
-bool             sel_4;
+int2_t           sel_4;
 int2_t           sel_5;
 int2_t           sel_6;
 bool             sel_7;
@@ -200,7 +200,7 @@ int2_t           sel_9;
 bool             sel_10;
 int2_t           sel_11;
 int2_t           sel_12;
-bool             sel_13;
+int2_t           sel_13;
 int2_t           sel_14;
 int2_t           sel_15;
 bool             sel_16;
@@ -221,7 +221,7 @@ int2_t           sel_30;
 bool             sel_31;
 int2_t           sel_32;
 int2_t           sel_33;
-bool             sel_34;
+int2_t           sel_34;
 int2_t           sel_35;
 int2_t           sel_36;
 
@@ -288,9 +288,9 @@ always_comb
 begin
   o__read_1  = state_1;
   o__read_2  = state_2;
-  if (rel_op(mux2(state_1, state_2, sel_1) + mux3(pkt_1, pkt_2, 0, sel_2) - mux3(pkt_1, pkt_2, 0, sel_3), cons_1, rel_op1))
+  if (rel_op(mux3(state_1, state_2, 0, sel_1) + mux3(pkt_1, pkt_2, 0, sel_2) - mux3(pkt_1, pkt_2, 0, sel_3), cons_1, rel_op1))
   begin
-   if (rel_op(mux2(state_1, state_2, sel_4) + mux3(pkt_1, pkt_2, 0, sel_5)   - mux3(pkt_1, pkt_2, 0, sel_6), cons_2, rel_op2))
+   if (rel_op(mux3(state_1, state_2, 0, sel_4) + mux3(pkt_1, pkt_2, 0, sel_5)   - mux3(pkt_1, pkt_2, 0, sel_6), cons_2, rel_op2))
    begin
     o__write_1 = mux2(state_1, 0, sel_7)  + arith_op(mux3(pkt_1, pkt_2, cons_3, sel_8)  , mux3(pkt_1, pkt_2, cons_4, sel_9),  arith_op1);
     o__write_2 = mux2(state_2, 0, sel_22) + arith_op(mux3(pkt_1, pkt_2, cons_12, sel_23), mux3(pkt_1, pkt_2, cons_13, sel_24),arith_op2);
@@ -301,9 +301,9 @@ begin
     o__write_2 = mux2(state_2, 0, sel_25) + arith_op(mux3(pkt_1, pkt_2, cons_14, sel_26), mux3(pkt_1, pkt_2, cons_15, sel_27),arith_op4);
    end
   end
-  else if (rel_op(mux2(state_1, state_2, sel_34) + mux3(pkt_1, pkt_2, 0, sel_35)   - mux3(pkt_1, pkt_2, 0, sel_36), cons_20, rel_op4))
+  else if (rel_op(mux3(state_1, state_2, 0, sel_34) + mux3(pkt_1, pkt_2, 0, sel_35)   - mux3(pkt_1, pkt_2, 0, sel_36), cons_20, rel_op4))
   begin
-   if (rel_op(mux2(state_1, state_2, sel_13) + mux3(pkt_1, pkt_2, 0, sel_14) - mux3(pkt_1, pkt_2, 0, sel_15), cons_7, rel_op3))
+   if (rel_op(mux3(state_1, state_2, 0, sel_13) + mux3(pkt_1, pkt_2, 0, sel_14) - mux3(pkt_1, pkt_2, 0, sel_15), cons_7, rel_op3))
    begin
     o__write_1 = mux2(state_1, 0, sel_16) + arith_op(mux3(pkt_1, pkt_2, cons_8, sel_17) , mux3(pkt_1, pkt_2, cons_9, sel_18),  arith_op5);
     o__write_2 = mux2(state_2, 0, sel_28) + arith_op(mux3(pkt_1, pkt_2, cons_16, sel_29), mux3(pkt_1, pkt_2, cons_17, sel_30), arith_op6);
