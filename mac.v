@@ -1,4 +1,4 @@
-module raw(
+module mac(
     clk,
 
     i__constant,
