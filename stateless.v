@@ -101,7 +101,7 @@ begin
     // arithmetic
     4'd0 : o_write = (op_bin_1 +  op_bin_2);
     4'd1 : o_write = (op_bin_1 -  op_bin_2);
-    // logical
+      // bit-wise operators (and, or, and xor)
     4'd2 : o_write = (op_bin_1 &  op_bin_2);
     4'd3 : o_write = (op_bin_1 ^  op_bin_2);
     4'd4 : o_write = (op_bin_1 |  op_bin_2);
